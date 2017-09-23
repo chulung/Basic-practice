@@ -11,9 +11,11 @@ public abstract class AbstractItem {
     private int num;
     private double amount;
 
-    public AbstractItem(int id) {
+    public AbstractItem(int id, int num) {
         this.id = id;
+        this.num = num;
     }
+
 
     public void accept(AbstractCartVisitor visitor) {
         visitor.visitDefault(this);

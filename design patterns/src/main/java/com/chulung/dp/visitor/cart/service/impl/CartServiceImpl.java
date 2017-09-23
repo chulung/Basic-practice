@@ -9,8 +9,10 @@ import com.chulung.dp.visitor.cart.service.CartService;
  * Created by chulung on 2017/9/2.
  */
 public class CartServiceImpl implements CartService {
+
     @Override
     public Cart refreshCart(Cart cart) {
+
         PromotionVisitor promotionVisitor = new PromotionVisitor();
         promotionVisitor.visit(cart);
         PriceVisitor priceVisitor = new PriceVisitor();

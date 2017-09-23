@@ -5,6 +5,7 @@ import com.chulung.dp.visitor.cart.service.PromotionService;
 import com.chulung.dp.visitor.cart.service.impl.PromotionServiceImpl;
 
 /**
+ * 促销visitor ，刷新商品折扣
  * Created by chulung on 2017/8/28.
  */
 public class PromotionVisitor extends AbstractCartVisitor {

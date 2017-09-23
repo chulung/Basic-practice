@@ -2,8 +2,6 @@ package com.chulung.dp.visitor.cart.service.impl;
 
 import com.chulung.dp.visitor.cart.service.PriceService;
 
-import java.util.Random;
-
 /**
  * Created by chulung on 2017/9/2.
  */
@@ -16,6 +14,6 @@ public class PriceServiceImpl implements PriceService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return new Random().nextDouble() * 10;
+        return 1;
     }
 }

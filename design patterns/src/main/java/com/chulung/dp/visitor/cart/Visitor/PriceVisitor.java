@@ -11,27 +11,40 @@ import com.chulung.dp.visitor.cart.service.impl.PriceServiceImpl;
  */
 public class PriceVisitor extends AbstractCartVisitor {
     private double amount;
-    private PriceService priceService=new PriceServiceImpl();
+    private PriceService priceService = new PriceServiceImpl();
+
     @Override
     public void visit(Cart cart) {
         super.visit(cart);
         amount = cart.getItems().stream().mapToDouble(AbstractItem::getAmount).sum();
     }
 
+    /**
+     * 普通商品价格
+     *
+     * @param item
+     */
     @Override
     public void visitDefault(AbstractItem item) {
         refreshPrice(item);
         item.setAmount(item.getPrice() * item.getNum());
     }
 
+    /**
+     * 促销商品价格处理
+     *
+     * @param item
+     */
     @Override
     public void visitPromotionItem(PromotionalItem item) {
         refreshPrice(item);
         item.setAmount(item.getPrice() * item.getNum() * item.getDiscount());
     }
+
     private void refreshPrice(AbstractItem item) {
         item.setPrice(priceService.queryPriceByItemId(item.getId()));
     }
+
     public double getCartAmount() {
         return amount;
     }
