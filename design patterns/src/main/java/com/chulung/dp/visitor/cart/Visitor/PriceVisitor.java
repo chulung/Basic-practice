@@ -2,7 +2,6 @@ package com.chulung.dp.visitor.cart.Visitor;
 
 import com.chulung.dp.visitor.cart.domain.AbstractItem;
 import com.chulung.dp.visitor.cart.domain.Cart;
-import com.chulung.dp.visitor.cart.domain.PromotionalItem;
 import com.chulung.dp.visitor.cart.service.PriceService;
 import com.chulung.dp.visitor.cart.service.impl.PriceServiceImpl;
 
@@ -28,17 +27,6 @@ public class PriceVisitor extends AbstractCartVisitor {
     public void visitDefault(AbstractItem item) {
         refreshPrice(item);
         item.setAmount(item.getPrice() * item.getNum());
-    }
-
-    /**
-     * 促销商品价格处理
-     *
-     * @param item
-     */
-    @Override
-    public void visitPromotionItem(PromotionalItem item) {
-        refreshPrice(item);
-        item.setAmount(item.getPrice() * item.getNum() * item.getDiscount());
     }
 
     private void refreshPrice(AbstractItem item) {

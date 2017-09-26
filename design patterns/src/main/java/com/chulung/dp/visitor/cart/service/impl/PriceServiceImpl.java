@@ -8,9 +8,9 @@ import com.chulung.dp.visitor.cart.service.PriceService;
 public class PriceServiceImpl implements PriceService {
     @Override
     public double queryPriceByItemId(int id) {
-        //模拟调用时间10毫秒
+        //模拟调用时间20毫秒
         try {
-            Thread.sleep(10);
+            Thread.sleep(20);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
