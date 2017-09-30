@@ -13,16 +13,11 @@ public class DoubleCheckSingleton {
         if (instance == null) {
             synchronized (DoubleCheckSingleton.class) {
                 if (instance == null) {
-                    DoubleCheckSingleton temp = new DoubleCheckSingleton();
-                    temp.initial();
-                    instance = temp;
+                    instance = new DoubleCheckSingleton();
                 }
             }
         }
         return instance;
     }
 
-    private void initial() {
-        System.out.println("initial..");
-    }
 }
