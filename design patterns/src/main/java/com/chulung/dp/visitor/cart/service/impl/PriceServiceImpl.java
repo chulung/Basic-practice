@@ -12,7 +12,6 @@ public class PriceServiceImpl implements PriceService {
         try {
             Thread.sleep(20);
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
         return 1;
     }

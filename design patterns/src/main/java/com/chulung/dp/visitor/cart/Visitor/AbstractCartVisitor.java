@@ -7,7 +7,6 @@ import com.chulung.dp.visitor.cart.domain.GeneralItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by chulung on 2017/8/28.
@@ -18,25 +17,9 @@ public abstract class AbstractCartVisitor implements CartVisitor {
 
     static {
         //实际的线程池大小应该根据现有机器配置来处理，这里暂时设为4，便于测试对比
-//        int corePoolSize = Runtime.getRuntime().availableProcessors();
-//        threadPoolExecutor = new ThreadPoolExecutor(corePoolSize, 20,
-        threadPoolExecutor = new ThreadPoolExecutor(4,4,
-                10, TimeUnit.MINUTES, new SynchronousQueue<Runnable>(), new ThreadFactory() {
-            private AtomicInteger index = new AtomicInteger(0);
-
-            @Override
-            public Thread newThread(Runnable r) {
-                //增加线程名
-                Thread t = new Thread(r);
-                t.setName("cartVisitor-thread-" + index.incrementAndGet());
-                return t;
-            }
-        }, new RejectedExecutionHandler() {
-            @Override
-            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-                r.run();
-            }
-        });
+//        int availableProcessors = Runtime.getRuntime().availableProcessors();
+        threadPoolExecutor = new ThreadPoolExecutor(4, 4,
+                10, TimeUnit.MINUTES, new SynchronousQueue<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());
     }
 
     @Override

@@ -10,14 +10,16 @@ public class DoubleCheckSingleton {
     private static volatile DoubleCheckSingleton instance;
 
     public static DoubleCheckSingleton getInstance() {
-        if (instance == null) {
+        // 临时变量减少一次对volatile变量的读取操作，可以提升性能，@"Effective Java, Second Edition", p. 283-284
+        DoubleCheckSingleton result = instance;
+        if (result == null) {
             synchronized (DoubleCheckSingleton.class) {
                 if (instance == null) {
-                    instance = new DoubleCheckSingleton();
+                    result = instance = new DoubleCheckSingleton();
                 }
             }
         }
-        return instance;
+        return result;
     }
 
 }
